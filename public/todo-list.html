@@ -171,7 +171,7 @@
 
             AddTask(input.value)
               // Make a POST request to the server
-              const response = await fetch("jarvis-3-8eja.onrender.com/addTodo", {
+              const response = await fetch("/addTodo", {
                   method: "POST",
                   headers: {
                       'Content-Type': 'application/json',
@@ -200,7 +200,7 @@
 
       window.onload = async () => {
         try {
-          const response = await fetch("jarvis-3-8eja.onrender.com/getTodo", {
+          const response = await fetch("/getTodo", {
             method: "GET",
             headers: {
               'Content-Type': 'application/json'
@@ -255,7 +255,7 @@ const remove = async (record) => {
   
 
   try{
-  const response = await fetch(`jarvis-3-8eja.onrender.com/deleteTodo/${record}` , {
+  const response = await fetch(`/deleteTodo/${record}` , {
 
     method:"DELETE",
     headers: {
