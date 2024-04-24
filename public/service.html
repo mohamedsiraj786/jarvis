@@ -304,6 +304,76 @@
     function redirectToChatbot() {
       window.location.href = 'chatbot.html';
     }
+
+    function speak(text) {
+      const text_speak = new SpeechSynthesisUtterance(text);
+      const voices = window.speechSynthesis.getVoices();
+      const femaleVoice = voices.find(voice => voice.name.includes('female'));
+    
+      if (femaleVoice) {
+          text_speak.voice = femaleVoice;
+      } else {
+          console.warn('No female voice found, using default voice.');
+      }
+    
+      text_speak.rate = 1;
+      text_speak.volume = 1;
+      text_speak.pitch = 1;
+    
+      window.speechSynthesis.speak(text_speak);
+    }
+    
+    function wishMe() {
+      var day = new Date();
+      var hour = day.getHours();
+      var period;
+    
+     speak("Welcome Back Siraj Boss")
+    
+      speak(`It's currently ${hour % 12 || 12} ${period} `);
+    }
+
+    function startSpeechRecognition() {
+      // Check if speech recognition is supported
+      if ('webkitSpeechRecognition' in window) {
+        const recognition = new webkitSpeechRecognition();
+    
+        // Set recognition parameters
+        recognition.continuous = true; // Keep recognition active continuously
+        recognition.lang = 'en-US';
+    
+        // Start recognition when the page loads
+        recognition.start();
+    
+        // Process recognized speech
+        recognition.onresult = function(event) {
+          const transcript = event.results[0][0].transcript.trim().toLowerCase();
+    
+          console.log('You said:', transcript);
+    
+          // Check for specific commands
+          if (transcript === 'open google') {
+            window.open('https://www.google.com', '_blank');
+          }
+        };
+    
+        // Handle recognition errors
+        recognition.onerror = function(event) {
+          console.error('Speech recognition error:', event.error);
+        };
+      } else {
+        console.error('Speech recognition not supported');
+      }
+    }
+    
+    window.onload = function() {
+        speak("Initializing MARK 67 Version 3.5 Turbo ..");
+        speak("parrmission Authorized ")
+        wishMe();
+        startSpeechRecognition();
+    };
+    
+
   </script>
  
 </body>
